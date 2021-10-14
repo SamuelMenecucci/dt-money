@@ -55,6 +55,7 @@ button {
     cursor: pointer;
 }
 
+//todo input que estiver com disable
 [disabled] {
     opacity:0.6;
     cursor: not-allowed;
@@ -90,7 +91,25 @@ button {
 
       //relative para conseguirmos posicionar o nosso botao ou qualquer outro conteudo utilizando position absolute
       position: relative;
-      
+
       border-radius: 0.24rem;
   }
+
+  .react-modal-close{
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+
+    //removendo a borda do button 
+    border: 0;
+
+    //o button vem com borda e background por padrão, então estou removendo
+    background: transparent;
+
+    transition: filter 0.2s;
+
+    :hover {
+        filter: brightness(0.8)
+    }
+}
 `;
