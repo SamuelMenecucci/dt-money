@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darken } from "polished";
+import { darken, transparentize } from "polished";
 
 export const Container = styled.form`
   h2 {
@@ -62,16 +62,28 @@ export const TransactionTypeContainer = styled.div`
   gap: 0.5rem;
 `;
 
+//criando uma interface para uma propriedade que criamos dentro do index.tsx
 interface RadioBoxProps {
   isActive: boolean;
+  activeColor: "green" | "red";
 }
 
+const colors = {
+  green: "#33CC95",
+  red: "#E52e54",
+};
+
+//dizendo que o nosso button possui a propriedade do tipo que criamos.
 export const RadioBox = styled.button<RadioBoxProps>`
   height: 4rem;
   border: 1px solid #d7d7d7;
   border-radius: 0.25rem;
 
-  background: ${(props) => (props.isActive ? "#eee" : "transparent")};
+  //passando a propriedade para utilizarmos ela para a alteração do estilo do botão
+  background: ${(props) =>
+    props.isActive
+      ? transparentize(0.9, colors[props.activeColor])
+      : "transparent"};
 
   display: flex;
   align-items: center;

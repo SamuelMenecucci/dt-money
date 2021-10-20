@@ -41,8 +41,11 @@ export function NewTransactionModal({
         <TransactionTypeContainer>
           <RadioBox
             type="button"
+            //setando o estado pelo clique do botão
             onClick={() => setType("deposit")}
+            //setando uma propriedade conforme o valor do estado
             isActive={type === "deposit"}
+            activeColor="green"
           >
             <img src={incomeImg} alt="entrada" />
             <span>Entrada</span>
@@ -52,6 +55,7 @@ export function NewTransactionModal({
             type="button"
             onClick={() => setType("withdraw")}
             isActive={type === "withdraw"}
+            activeColor="red"
           >
             <img src={outcomeImg} alt="saída" />
             <span>Saída</span>
