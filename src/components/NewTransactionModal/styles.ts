@@ -3,8 +3,8 @@ import { darken } from "polished";
 
 export const Container = styled.form`
   h2 {
-    color: var(--text-title-color);
-    font-size: size 1.5rem;
+    color: var(--text-title);
+    font-size: 1.5rem;
     margin-bottom: 2rem;
   }
 
@@ -60,38 +60,42 @@ export const TransactionTypeContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
+`;
 
-  button {
-    height: 4rem;
-    border: 1px solid #d7d7d7;
-    border-radius: 0.25rem;
+interface RadioBoxProps {
+  isActive: boolean;
+}
 
-    background: transparent;
+export const RadioBox = styled.button<RadioBoxProps>`
+  height: 4rem;
+  border: 1px solid #d7d7d7;
+  border-radius: 0.25rem;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: ${(props) => (props.isActive ? "#eee" : "transparent")};
 
-    transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &:hover {
-      //para escurecermos a borda ao passarmos o mouse. não iremos utilizar o filter pois ele escurece o elemento inteiro, não conseguimos escurecer apenas a borda.
-      //utilizando o darken que importei da blibioteca polished
-      border-color: ${darken(0.1, "#d7d7d7")};
-    }
+  transition: border-color 0.2s;
 
-    img {
-      width: 20px;
-      height: 20px;
-    }
+  &:hover {
+    //para escurecermos a borda ao passarmos o mouse. não iremos utilizar o filter pois ele escurece o elemento inteiro, não conseguimos escurecer apenas a borda.
+    //utilizando o darken que importei da blibioteca polished
+    border-color: ${darken(0.1, "#d7d7d7")};
+  }
 
-    span {
-      //para conseguir fazer a estilização do span eu dou o inline-block
-      display: inline-block;
+  img {
+    width: 20px;
+    height: 20px;
+  }
 
-      margin-left: 1rem;
-      font-size: 1rem;
-      color: var(--text-title);
-    }
+  span {
+    //para conseguir fazer a estilização do span eu dou o inline-block
+    display: inline-block;
+
+    margin-left: 1rem;
+    font-size: 1rem;
+    color: var(--text-title);
   }
 `;
