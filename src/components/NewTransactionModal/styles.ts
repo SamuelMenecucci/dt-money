@@ -92,7 +92,6 @@ export const RadioBox = styled.button<RadioBoxProps>`
   transition: border-color 0.2s;
 
   &:hover {
-    //para escurecermos a borda ao passarmos o mouse. não iremos utilizar o filter pois ele escurece o elemento inteiro, não conseguimos escurecer apenas a borda.
     //utilizando o darken que importei da blibioteca polished
     border-color: ${darken(0.1, "#d7d7d7")};
   }
