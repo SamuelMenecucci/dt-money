@@ -1,10 +1,12 @@
 import Modal from "react-modal";
-import { Container, TransactionTypeContainer, RadioBox } from "./styles";
+import { FormEvent, useContext, useState } from "react";
+import { TransactionsContext } from "../../TransactionsContext";
+
 import closeImg from "../../assets/fechar.svg";
 import incomeImg from "../../assets/entradas.svg";
 import outcomeImg from "../../assets/saídas.svg";
-import { FormEvent, useState } from "react";
-import { api } from "../../services/api";
+
+import { Container, TransactionTypeContainer, RadioBox } from "./styles";
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -15,6 +17,8 @@ export function NewTransactionModal({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) {
+  const { createTransaction } = useContext(TransactionsContext);
+
   const [type, setType] = useState("deposit");
 
   //crio um estado para cada informação que irei armazenar dos inputs
@@ -25,16 +29,12 @@ export function NewTransactionModal({
   function handleNewTransaction(event: FormEvent) {
     event.preventDefault();
 
-    const data = {
+    createTransaction({
       title,
-      value,
+      amount: value,
       category,
       type,
-    };
-
-    api.post("/transactions", data);
-
-    // console.log(data);
+    });
   }
 
   return (
