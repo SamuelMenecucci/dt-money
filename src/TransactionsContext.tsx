@@ -14,7 +14,7 @@ type TransactionInput = Omit<Transaction, "id" | "createdAt">;
 
 interface TransactionsContextData {
   transactions: Transaction[];
-  createTransaction: (transaction: TransactionInput) => void;
+  createTransaction: (transaction: TransactionInput) => Promise<void>;
 }
 
 interface TransactionsProviderProps {
@@ -34,8 +34,16 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
       .then((response: any) => setTransactions(response.data.transactions));
   }, []);
 
-  function createTransaction(transaction: TransactionInput) {
-    api.post("/transactions", transaction);
+  async function createTransaction(transactionInput: TransactionInput) {
+    //por conta de uma atualização do axios, ele colocar um type never em dados da request, para resolver isso, coloco o <any> para forçar o tipo de retorno, ou posso criar uma outra interface
+    const response = await api.post<any>("/transactions", {
+      ...transactionInput,
+      createdAt: new Date(),
+    });
+
+    const { transaction } = response.data;
+
+    setTransactions([...transactions, transaction]);
   }
 
   return (
